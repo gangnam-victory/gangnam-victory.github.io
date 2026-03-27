@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#c0392b" />
+  <title>전선영 강남구청장 예비후보</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #c0392b;
+      --red-dark: #a93226;
+      --black: #111111;
+      --white: #ffffff;
+      --bg: #f7f7f7;
+      --tab-h: 60px;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      font-family: 'Noto Sans KR', sans-serif;
+      overscroll-behavior: none;
+    }
+
+    /* ── Header ── */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--red);
+      padding: 10px 16px 9px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    }
+    .header-badge {
+      background: var(--white);
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 3px;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+    .header-name {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .header-sub {
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-weight: 400;
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* ── Scroll container ── */
+    .content-wrap {
+      position: fixed;
+      top: 50px;
+      bottom: var(--tab-h);
+      left: 0; right: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: var(--bg);
+    }
+
+    /* ── Panels ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* ── Bottom Tab Bar ── */
+    .tab-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: var(--tab-h);
+      background: var(--black);
+      display: flex;
+      border-top: 3px solid var(--red);
+      z-index: 100;
+    }
+
+    .tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 2px;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      transition: background 0.12s;
+    }
+
+    .tab-btn:active { background: rgba(255,255,255,0.07); }
+
+    .tab-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      text-align: center;
+      word-break: keep-all;
+      transition: color 0.15s;
+    }
+
+    .tab-btn.active .tab-label {
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      top: -3px; left: 8%; right: 8%;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .tab-btn + .tab-btn {
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ── Notch / home indicator safe area ── */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .tab-bar {
+        height: calc(var(--tab-h) + env(safe-area-inset-bottom));
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .content-wrap {
+        bottom: calc(var(--tab-h) + env(safe-area-inset-bottom));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="header-badge">강남구청장 예비후보</span>
+    <span class="header-name">전선영</span>
+    <span class="header-sub">국민의힘</span>
+  </header>
+
+  <!-- Scroll area -->
+  <div class="content-wrap" id="contentWrap">
+
+    <div class="panel active" id="panel-0">
+      <img src="assets/1.jpg" alt="프로필" loading="eager" />
+    </div>
+
+    <div class="panel" id="panel-1">
+      <img src="assets/2.jpg" alt="전선영소개" loading="lazy" />
+    </div>
+
+    <div class="panel" id="panel-2">
+      <img src="assets/3.jpg" alt="주요공약 1" loading="lazy" />
+    </div>
+
+    <div class="panel" id="panel-3">
+      <img src="assets/4.jpg" alt="후원하시는길" loading="lazy" />
+    </div>
+
+    <div class="panel" id="panel-4">
+      <img src="assets/5.jpg" alt="전선영강점" loading="lazy" />
+    </div>
+
+  </div>
+
+  <!-- Bottom Tab Bar -->
+  <nav class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab(0)">
+      <span class="tab-label">프로필</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab(1)">
+      <span class="tab-label">후보<br>소개</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab(2)">
+      <span class="tab-label">주요<br>공약</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab(3)">
+      <span class="tab-label">후원<br>안내</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab(4)">
+      <span class="tab-label">전선영<br>강점</span>
+    </button>
+  </nav>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+    const wrap = document.getElementById('contentWrap');
+
+    function switchTab(idx) {
+      tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
+      panels.forEach((p, i) => p.classList.toggle('active', i === idx));
+      wrap.scrollTop = 0;
+    }
+  </script>
+
+</body>
+</html>
