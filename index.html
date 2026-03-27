@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#c0392b" />
+  <meta name="theme-color" content="#E61E2B" />
   <title>전선영 강남구청장 예비후보</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- OG Tags -->
   <meta property="og:title" content="전선영 강남구청장 예비후보" />
   <meta property="og:description" content="강남구의 변화, 전선영이 만들겠습니다." />
   <meta property="og:image" content="https://gangnam-victory.github.io/assets/1.jpg" />
   <meta property="og:url" content="https://gangnam-victory.github.io/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #c0392b;
-      --red-dark: #a93226;
+      --red: #E61E2B;
+      --red-dark: #c0181e;
       --black: #111111;
       --white: #ffffff;
       --bg: #f7f7f7;
-      --tab-h: 60px;
+      --header-h: 52px;
+      --tab-h: 62px;
     }
 
     html, body {
@@ -36,40 +40,58 @@
       top: 0; left: 0; right: 0;
       z-index: 100;
       background: var(--red);
-      padding: 10px 16px 9px;
+      height: var(--header-h);
+      padding: 0 14px;
       display: flex;
       align-items: center;
       gap: 10px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
+
+    /* 국민의힘 로고 이미지 */
+    .header-logo {
+      height: 26px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .header-party {
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      flex-shrink: 0;
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255,255,255,0.35);
+      flex-shrink: 0;
+    }
+
     .header-badge {
       background: var(--white);
       color: var(--red);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 3px 8px;
+      padding: 3px 7px;
       border-radius: 3px;
       white-space: nowrap;
-      letter-spacing: 0.01em;
     }
+
     .header-name {
       color: var(--white);
       font-size: 20px;
       font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .header-sub {
-      color: rgba(255,255,255,0.7);
-      font-size: 12px;
-      font-weight: 400;
-      margin-left: auto;
-      white-space: nowrap;
+      letter-spacing: -0.03em;
     }
 
     /* ── Scroll container ── */
     .content-wrap {
       position: fixed;
-      top: 50px;
+      top: var(--header-h);
       bottom: var(--tab-h);
       left: 0; right: 0;
       overflow-y: auto;
@@ -80,7 +102,6 @@
     /* ── Panels ── */
     .panel { display: none; }
     .panel.active { display: block; }
-
     .panel img {
       display: block;
       width: 100%;
@@ -106,7 +127,7 @@
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px 2px;
+      padding: 6px 3px;
       -webkit-tap-highlight-color: transparent;
       position: relative;
       transition: background 0.12s;
@@ -114,36 +135,34 @@
 
     .tab-btn:active { background: rgba(255,255,255,0.07); }
 
+    /* 비활성: 흰색 큰 글자 */
     .tab-label {
       font-family: 'Noto Sans KR', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: -0.03em;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.04em;
       line-height: 1.2;
       text-align: center;
       word-break: keep-all;
       transition: color 0.15s;
+      padding: 7px 2px;
+      border-radius: 6px;
+      width: 92%;
     }
 
+    /* 활성: 빨간 버튼 배경 */
     .tab-btn.active .tab-label {
+      background: var(--red);
       color: var(--white);
       font-weight: 900;
-    }
-
-    .tab-btn.active::after {
-      content: '';
-      position: absolute;
-      top: -3px; left: 8%; right: 8%;
-      height: 3px;
-      background: var(--red);
     }
 
     .tab-btn + .tab-btn {
       border-left: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* ── Notch / home indicator safe area ── */
+    /* ── Notch safe area ── */
     @supports (padding-bottom: env(safe-area-inset-bottom)) {
       .tab-bar {
         height: calc(var(--tab-h) + env(safe-area-inset-bottom));
@@ -159,9 +178,11 @@
 
   <!-- Header -->
   <header class="header">
+    <img class="header-logo" src="assets/ppp.png" alt="국민의힘" />
+    <span class="header-party">국민의힘</span>
+    <span class="header-divider"></span>
     <span class="header-badge">강남구청장 예비후보</span>
     <span class="header-name">전선영</span>
-    <span class="header-sub">국민의힘</span>
   </header>
 
   <!-- Scroll area -->
@@ -172,19 +193,20 @@
     </div>
 
     <div class="panel" id="panel-1">
-      <img src="assets/2.jpg" alt="전선영소개" loading="lazy" />
+      <img src="assets/2.jpg" alt="출마각오" loading="lazy" />
     </div>
 
     <div class="panel" id="panel-2">
       <img src="assets/3.jpg" alt="주요공약 1" loading="lazy" />
+      <img src="assets/4.jpg" alt="주요공약 2" loading="lazy" />
     </div>
 
     <div class="panel" id="panel-3">
-      <img src="assets/4.jpg" alt="후원하시는길" loading="lazy" />
+      <img src="assets/5.jpg" alt="후원안내" loading="lazy" />
     </div>
 
     <div class="panel" id="panel-4">
-      <img src="assets/5.jpg" alt="전선영강점" loading="lazy" />
+      <img src="assets/6.jpg" alt="전선영강점" loading="lazy" />
     </div>
 
   </div>
@@ -195,7 +217,7 @@
       <span class="tab-label">프로필</span>
     </button>
     <button class="tab-btn" onclick="switchTab(1)">
-      <span class="tab-label">후보<br>소개</span>
+      <span class="tab-label">출마<br>각오</span>
     </button>
     <button class="tab-btn" onclick="switchTab(2)">
       <span class="tab-label">주요<br>공약</span>
