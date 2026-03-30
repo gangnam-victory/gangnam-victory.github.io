@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -13,9 +14,16 @@
   <meta property="og:url" content="https://gangnam-victory.github.io/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+    rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --red: #E61E2B;
@@ -27,7 +35,8 @@
       --tab-h: 62px;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       background: var(--bg);
       font-family: 'Noto Sans KR', sans-serif;
@@ -37,7 +46,9 @@
     /* ── Header ── */
     .header {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       background: var(--red);
       height: var(--header-h);
@@ -45,10 +56,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     }
 
-    /* 국민의힘 로고 이미지 */
     .header-logo {
       height: 36px;
       width: auto;
@@ -59,7 +69,7 @@
     .header-divider {
       width: 1px;
       height: 18px;
-      background: rgba(255,255,255,0.35);
+      background: rgba(255, 255, 255, 0.35);
       flex-shrink: 0;
     }
 
@@ -85,25 +95,76 @@
       position: fixed;
       top: var(--header-h);
       bottom: var(--tab-h);
-      left: 0; right: 0;
+      left: 0;
+      right: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       background: var(--bg);
     }
 
     /* ── Panels ── */
-    .panel { display: none; }
-    .panel.active { display: block; }
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
     .panel img {
       display: block;
       width: 100%;
       height: auto;
     }
 
+    /* ── Video Panel ── */
+    .video-section {
+      padding: 20px 16px;
+    }
+
+    .video-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 14px;
+      text-align: center;
+      letter-spacing: -0.03em;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      /* 16:9 비율 */
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-caption {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
+    }
+
     /* ── Bottom Tab Bar ── */
     .tab-bar {
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: var(--tab-h);
       background: var(--black);
       display: flex;
@@ -125,9 +186,10 @@
       transition: background 0.12s;
     }
 
-    .tab-btn:active { background: rgba(255,255,255,0.07); }
+    .tab-btn:active {
+      background: rgba(255, 255, 255, 0.07);
+    }
 
-    /* 비활성: 흰색 큰 글자 */
     .tab-label {
       font-family: 'Noto Sans KR', sans-serif;
       font-size: 15px;
@@ -143,15 +205,14 @@
       width: 92%;
     }
 
-    /* 활성: 빨간 버튼 배경 */
     .tab-btn.active .tab-label {
       background: var(--red);
       color: var(--white);
       font-weight: 900;
     }
 
-    .tab-btn + .tab-btn {
-      border-left: 1px solid rgba(255,255,255,0.1);
+    .tab-btn+.tab-btn {
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* ── Notch safe area ── */
@@ -160,12 +221,14 @@
         height: calc(var(--tab-h) + env(safe-area-inset-bottom));
         padding-bottom: env(safe-area-inset-bottom);
       }
+
       .content-wrap {
         bottom: calc(var(--tab-h) + env(safe-area-inset-bottom));
       }
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header -->
@@ -199,6 +262,18 @@
       <img src="assets/5.jpg" alt="후보소개" loading="lazy" />
     </div>
 
+    <div class="panel" id="panel-5">
+      <div class="video-section">
+        <h2 class="video-title">전선영 홍보영상</h2>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/Wr-46C3cs6U?rel=0&modestbranding=1&playsinline=1" title="전선영 홍보영상"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <p class="video-caption">강남의 변화, 전선영이 만듭니다.</p>
+      </div>
+    </div>
+
   </div>
 
   <!-- Bottom Tab Bar -->
@@ -218,6 +293,9 @@
     <button class="tab-btn" onclick="switchTab(4)">
       <span class="tab-label">후보자<br>소개</span>
     </button>
+    <button class="tab-btn" onclick="switchTab(5)">
+      <span class="tab-label">홍보<br>영상</span>
+    </button>
   </nav>
 
   <script>
@@ -229,8 +307,19 @@
       tabs.forEach((t, i) => t.classList.toggle('active', i === idx));
       panels.forEach((p, i) => p.classList.toggle('active', i === idx));
       wrap.scrollTop = 0;
+
+      // pause Youtube
+      if (idx !== 5) {
+        const iframe = document.querySelector('#panel-5 iframe');
+        if (iframe) {
+          const src = iframe.src;
+          iframe.src = '';
+          iframe.src = src;
+        }
+      }
     }
   </script>
 
 </body>
+
 </html>
